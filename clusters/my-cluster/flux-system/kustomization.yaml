@@ -1,5 +1,46 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+
 resources:
 - gotk-components.yaml
 - gotk-sync.yaml
+
+patches:
+  - patch: |
+      apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+      kind: Kustomization
+      metadata:
+        name: flux-system
+        namespace: flux-system
+      spec:
+        decryption:
+          provider: sops
+          secretRef:
+            name: sops-gpg
+        postBuild:
+          substitute: {}
+          substituteFrom:
+            - kind: Secret
+              name: cluster-secrets
+    target:
+      kind: Kustomization
+      name: flux-system
+      namespace: flux-system
+  - patch: |
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: all
+      spec:
+        template:
+          spec:
+            containers:
+              - name: manager
+                env:
+                  - name: "HTTPS_PROXY"
+                    value: "http://proxy.rd.francetelecom.fr:8080"
+                  - name: "NO_PROXY"
+                    value: ".cluster.local.,.cluster.local,.svc"      
+    target:
+      kind: Deployment
+      labelSelector: app.kubernetes.io/part-of=flux
