@@ -16,7 +16,7 @@ patches:
               - name: manager
                 env:
                   - name: "HTTPS_PROXY"
-                    value: "http://proxy.rd.francetelecom.fr:8080"
+                    value: "http://10.193.21.116:8080"
                   - name: "NO_PROXY"
                     value: ".cluster.local.,.cluster.local,.svc"      
     target:
