@@ -5286,6 +5286,10 @@ spec:
         - --storage-path=/data
         - --storage-adv-addr=source-controller.$(RUNTIME_NAMESPACE).svc.cluster.local.
         env:
+        - name: "HTTPS_PROXY"
+          value: "http://proxy.rd.francetelecom.fr:8080"
+        - name: "NO_PROXY"
+          value: ".cluster.local.,.cluster.local,.svc"
         - name: RUNTIME_NAMESPACE
           valueFrom:
             fieldRef:
@@ -7189,6 +7193,10 @@ spec:
         - --log-encoding=json
         - --enable-leader-election
         env:
+        - name: "HTTPS_PROXY"
+          value: "http://proxy.rd.francetelecom.fr:8080"
+        - name: "NO_PROXY"
+          value: ".cluster.local.,.cluster.local,.svc"
         - name: RUNTIME_NAMESPACE
           valueFrom:
             fieldRef:
@@ -10991,6 +10999,10 @@ spec:
         - --log-encoding=json
         - --enable-leader-election
         env:
+        - name: "HTTPS_PROXY"
+          value: "http://proxy.rd.francetelecom.fr:8080"
+        - name: "NO_PROXY"
+          value: ".cluster.local.,.cluster.local,.svc"
         - name: RUNTIME_NAMESPACE
           valueFrom:
             fieldRef:
@@ -12964,6 +12976,10 @@ spec:
         - --log-encoding=json
         - --enable-leader-election
         env:
+        - name: "HTTPS_PROXY"
+          value: "http://proxy.rd.francetelecom.fr:8080"
+        - name: "NO_PROXY"
+          value: ".cluster.local.,.cluster.local,.svc"
         - name: RUNTIME_NAMESPACE
           valueFrom:
             fieldRef:
