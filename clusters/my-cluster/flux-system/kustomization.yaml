@@ -15,8 +15,12 @@ patches:
             containers:
               - name: manager
                 env:
-                  - name: "HTTPS_PROXY"
+                  - name: "http_proxy"
                     value: "http://10.193.21.116:8080"
+                  - name: "https_proxy"
+                    value: "http://10.193.21.116:8080"
+                  - name: "no_proxy"
+                    value: "localhost,127.0.0.1,10.0.0.0/8,172.18.0.0/16,.cluster.local.,.cluster.local,.svc,.flux-system"                    
     target:
       kind: Deployment
       labelSelector: app.kubernetes.io/part-of=flux
