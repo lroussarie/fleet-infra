@@ -15,7 +15,7 @@ patches:
             containers:
               - name: manager
                 env:
-                  - name: "HTTPS_PROXY"
+                  - name: "https_proxy"
                     value: "http://10.193.21.116:8080"
     target:
       kind: Deployment
